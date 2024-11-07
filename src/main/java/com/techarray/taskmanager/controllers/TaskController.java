@@ -2,6 +2,7 @@ package com.techarray.taskmanager.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.techarray.taskmanager.dto.CreateTaskDTO;
 import com.techarray.taskmanager.entities.TaskEntity;
 import com.techarray.taskmanager.services.TaskService;
 
@@ -10,7 +11,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -40,9 +40,9 @@ public class TaskController {
     }
 
     @PostMapping("path")
-    public ResponseEntity<TaskEntity> addTask(String title, String description, String deadline) {
-        taskService.addTask(title, description, deadline);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<TaskEntity> addTask(@RequestBody CreateTaskDTO body) {
+        var task = taskService.addTask(body.getTitle(), body.getDescription(), body.getDeadline());
+        return ResponseEntity.ok(task);
     }
     
     
