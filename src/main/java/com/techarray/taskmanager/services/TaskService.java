@@ -3,7 +3,6 @@ package com.techarray.taskmanager.services;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.stereotype.Service;
@@ -16,14 +15,14 @@ public class TaskService {
     private int taskId = 1;
     SimpleDateFormat deadlineFormatter = new SimpleDateFormat("yyyy-M-dd", Locale.ENGLISH);
 
-    public TaskEntity addTask( String title, String description, String deadline ) throws ParseException {        
+    public TaskEntity addTask(String title, String description, String deadline) throws ParseException {
         TaskEntity task = new TaskEntity();
         task.setId(taskId);
         task.setTitle(title);
         task.setDescription(description);
         task.setDeadline(deadlineFormatter.parse(deadline));
         task.setCompleted(false);
-        tasks.add( task );
+        tasks.add(task);
         taskId++;
         return task;
     }
@@ -33,27 +32,27 @@ public class TaskService {
     }
 
     public TaskEntity getTaskById(int id) {
-        for( TaskEntity task : tasks ){
-            if( task.getId() == id ) {
+        for (TaskEntity task : tasks) {
+            if (task.getId() == id) {
                 return task;
             }
         }
         return null;
     }
 
-    public TaskEntity updateTask(int id, String description, String deadline, Boolean completed ) throws ParseException {
-        TaskEntity task = getTaskById( id );
+    public TaskEntity updateTask(int id, String description, String deadline, Boolean completed) throws ParseException {
+        TaskEntity task = getTaskById(id);
 
-        if( task == null ) {
-            return  null;
+        if (task == null) {
+            return null;
         }
-        if( description != null ) {
+        if (description != null) {
             task.setDescription(description);
         }
-        if( deadline != null ) {
+        if (deadline != null) {
             task.setDeadline(deadlineFormatter.parse(deadline));
         }
-        if( completed != null ) {
+        if (completed != null) {
             task.setCompleted(completed);
         }
         return task;

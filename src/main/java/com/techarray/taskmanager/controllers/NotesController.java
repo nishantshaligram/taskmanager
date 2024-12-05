@@ -22,6 +22,10 @@ public class NotesController {
 
     private NotesService notesService;
 
+    public NotesController(NotesService notesService) {
+        this.notesService = notesService;
+    }
+
     @GetMapping("")
     public ResponseEntity<List<NoteEntity>> getNotes(@PathVariable("taskId") Integer taskId) {
         var notes = notesService.getNotesForTask(taskId);
